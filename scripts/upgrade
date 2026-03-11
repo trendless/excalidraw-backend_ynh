@@ -7,58 +7,51 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
 
-# Remove the service from the list of services known by Yunohost (added from `yunohost service add`)
 if ynh_hide_warnings yunohost service status $app >/dev/null; then
 	yunohost service remove $app
 fi
 
-# Remove the dedicated systemd config
 ynh_config_remove_systemd
 
-# Remove the app-specific logrotate config
 ynh_config_remove_logrotate
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-
 ynh_script_progression "Upgrading source files..."
 
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir="$install_dir/build"
+ynh_setup_source --dest_dir="$install_dir" --keep=".env.production"
 
-chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R $app:$app "$install_dir"
 
 #=================================================
-# NGINX CONFIGURATION
+# SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Upgrading NGINX web server configuration..."
+ynh_script_progression "Adding system configurations..."
 
-# Create a dedicated NGINX config
 ynh_config_add_nginx
+
+ynh_config_add_systemd --service="$app" --template="systemd.service"
+yunohost service add "$app" --log "/var/log/$app/$app.log"
+
+ynh_config_add_logrotate
 
 #=================================================
 # BUILD APP
 #=================================================
 ynh_script_progression "Building app... (this will take some time and resources!)"
 
-pushd "$install_dir/build"
-	corepack enable
-    ynh_hide_warnings corepack prepare yarn@latest --activate
-	ynh_hide_warnings ynh_exec_as_app yarn config set network-timeout 600000
-	ynh_hide_warnings ynh_exec_as_app yarn install
-	ynh_hide_warnings ynh_exec_as_app NODE_ENV=production NODE_OPTIONS="--max-old-space-size=3000" yarn build
-	ynh_hide_warnings ynh_exec_as_app NODE_ENV=production yarn cache clean --all
+pushd "$install_dir"
+	ynh_hide_warnings ynh_exec_as_app npm install
+	ynh_hide_warnings ynh_exec_as_app npm run build
 popd
 
-ynh_safe_rm "$install_dir/live"
-ynh_exec_as_app mv "$install_dir/build/excalidraw-app/build" "$install_dir/live"
-ynh_safe_rm "$install_dir/build"
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression "Starting systemd service..."
 
-chmod 750 "$install_dir"
-chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+ynh_systemctl --service="$app" --action="start" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # END OF SCRIPT
