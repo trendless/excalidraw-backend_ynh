@@ -56,6 +56,7 @@ ram.runtime = "50M"
     main.url = "/"
 
     [resources.ports]
+    prometheus.exposed = false
 
     [resources.nodejs]
     version = "22"
