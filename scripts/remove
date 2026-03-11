@@ -3,12 +3,18 @@
 source /usr/share/yunohost/helpers
 
 #=================================================
-# REMOVE NGINX CONFIGURATION
+# REMOVE SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Removing NGINX web server configuration..."
+ynh_script_progression "Removing system configurations..."
 
-# Remove the dedicated NGINX config
+if ynh_hide_warnings yunohost service status "$app" >/dev/null; then
+    yunohost service remove "$app"
+fi
+ynh_config_remove_systemd "$app"
+
 ynh_config_remove_nginx
+
+ynh_config_remove_logrotate
 
 #=================================================
 # END OF SCRIPT
