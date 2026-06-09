@@ -7,7 +7,7 @@ name = "Excalidraw Backend"
 description.en = "Virtual whiteboard for sketching hand-drawn like diagrams"
 description.fr = "Tableau blanc collaboratif virtuel qui vous permet d'esquisser facilement des diagrammes"
 
-version = "2025.8.2~ynh1"
+version = "2026.3.0~ynh1"
 
 maintainers = []
 
@@ -44,8 +44,8 @@ ram.runtime = "50M"
     [resources.sources]
 
     [resources.sources.main]
-    url = "https://github.com/jitsi/excalidraw-backend/archive/refs/tags/2025.8.2.tar.gz"
-    sha256 = "f620b30a02ac43d4d8ff2c60cb1a57fcde3d3f59c9ff207e1e0d488eecbc2b8c"
+    url = "https://github.com/jitsi/excalidraw-backend/archive/refs/tags/2026.3.0.tar.gz"
+    sha256 = "00fd61e604bf8832176d8bfbf3f9e7045e3bf624ee534dfaa6b55bfa475eb28b"
     autoupdate.strategy = "latest_github_release"
 
     [resources.system_user]
