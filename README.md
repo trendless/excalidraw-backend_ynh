@@ -5,18 +5,13 @@ It shall NOT be edited by hand.
 
 <h1>
   <img src="https://raw.githubusercontent.com/YunoHost/apps/main/logos/excalidraw.png" width="32px" alt="Logo of Excalidraw">
-  Excalidraw, packaged for YunoHost
+  Excalidraw-backend, packaged for YunoHost
 </h1>
 
-Virtual whiteboard for sketching hand-drawn like diagrams
-
-[![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://excalidraw.com)
-[![App Demo](https://img.shields.io/badge/App_Demo-blue?style=for-the-badge)](https://excalidraw.com)
-[![Version: 0.18.0~ynh2](https://img.shields.io/badge/Version-0.18.0~ynh2-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/excalidraw/)
+Virtual whiteboard for sketching hand-drawn like diagrams for integration into Jitsi
 
 <div align="center">
-<a href="https://apps.yunohost.org/app/excalidraw"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
-<a href="https://github.com/YunoHost-Apps/excalidraw_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
+<a href="https://github.com/trendless/excalidraw-backend_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
 </div>
 
 
@@ -25,19 +20,17 @@ Virtual whiteboard for sketching hand-drawn like diagrams
 
 ## 📦 Developer info
 
-[![Automatic tests level](https://apps.yunohost.org/badge/cilevel/excalidraw)](https://ci-apps.yunohost.org/ci/apps/excalidraw/)
+🛠️ Upstream Excalidraw repository: <https://github.com/jitsi/excalidraw-backend>
 
-🛠️ Upstream Excalidraw repository: <https://github.com/excalidraw/excalidraw>
-
-Pull request are welcome and should target the [`testing` branch](https://github.com/YunoHost-Apps/excalidraw_ynh/tree/testing).
+Pull request are welcome and should target the [`testing` branch](https://github.com/trendless/excalidraw-backend_ynh/tree/testing).
 
 The `testing` branch can be tested using:
 ```
 # fresh install:
-sudo yunohost app install https://github.com/YunoHost-Apps/excalidraw_ynh/tree/testing
+sudo yunohost app install https://github.com/trendless/excalidraw-backend_ynh/tree/testing
 
 # upgrade an existing install:
-sudo yunohost app upgrade excalidraw -u https://github.com/YunoHost-Apps/excalidraw_ynh/tree/testing
+sudo yunohost app upgrade excalidraw -u https://github.com/trendless/excalidraw-backend_ynh/tree/testing
 ```
 
 ### 📚 App packaging documentation
